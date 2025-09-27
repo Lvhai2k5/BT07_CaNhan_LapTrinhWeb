@@ -1,0 +1,29 @@
+<!-- templates/fragments/_pagination.html -->
+<div th:fragment="fragment(page, q)">
+  <div th:if="${page.totalPages > 1}" class="d-flex justify-content-center mt-3">
+    <nav>
+      <ul class="pagination mb-0">
+        <!-- Previous -->
+        <li class="page-item" th:classappend="${page.first} ? 'disabled'">
+          <a class="page-link"
+             th:href="@{|?q=${q}&page=${page.number-1}&size=${page.size}|}">«</a>
+        </li>
+
+        <!-- Page numbers -->
+        <li class="page-item"
+            th:each="i : ${#numbers.sequence(0, page.totalPages-1)}"
+            th:classappend="${i} == ${page.number} ? 'active'">
+          <a class="page-link"
+             th:text="${i+1}"
+             th:href="@{|?q=${q}&page=${i}&size=${page.size}|}"></a>
+        </li>
+
+        <!-- Next -->
+        <li class="page-item" th:classappend="${page.last} ? 'disabled'">
+          <a class="page-link"
+             th:href="@{|?q=${q}&page=${page.number+1}&size=${page.size}|}">»</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

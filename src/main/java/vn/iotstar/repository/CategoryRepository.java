@@ -1,9 +1,12 @@
 package vn.iotstar.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-import vn.iotstar.entity.CategoryEntity;
+import vn.iotstar.entity.Category;
 
-@Repository
-public interface CategoryRepository extends JpaRepository<CategoryEntity, Long> {
+public interface CategoryRepository extends JpaRepository<Category, Long> {
+
+    Page<Category> findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(
+            String name, String description, Pageable pageable);
 }

@@ -1,4 +1,10 @@
-body { font-family: Arial, sans-serif; margin: 20px; }
-.container { max-width: 900px; margin: auto; }
-table { width: 100%; border-collapse: collapse; }
-th, td { padding: 8px; text-align: left; }
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f7f9fc;
+}
+.btn-round {
+  border-radius: 50px;
+}
+.table tbody tr:hover {
+  background: #f8f9fa;
+}

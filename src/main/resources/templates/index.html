@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="vi"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/base}">
+<head>
+  <title>Trang chủ</title>
+</head>
+<body>
+<section layout:fragment="content">
+  <div class="text-center py-5">
+    <h1 class="fw-bold text-primary">🎉 Chào mừng đến với Category Manager</h1>
+    <p class="lead text-muted">Ứng dụng CRUD + Tìm kiếm + Phân trang bằng Spring Boot & Thymeleaf</p>
+    <a class="btn btn-lg btn-primary btn-round mt-3" th:href="@{/categories}">
+      ➡ Quản lý danh mục
+    </a>
+  </div>
+</section>
+</body>
+</html>

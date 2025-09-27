@@ -1,30 +1,15 @@
 package vn.iotstar.service;
 
-import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
-import vn.iotstar.repository.CategoryRepository;
-import vn.iotstar.entity.CategoryEntity;
-import java.util.List;
-import java.util.Optional;
+import org.springframework.data.domain.Page;
+import vn.iotstar.entity.Category;
 
-@Service
-public class CategoryService {
-    @Autowired
-    private CategoryRepository categoryRepository;
+public interface CategoryService {
 
-    public List<CategoryEntity> findAll() {
-        return categoryRepository.findAll();
-    }
+    Page<Category> search(String keyword, int page, int size);
 
-    public CategoryEntity save(CategoryEntity entity) {
-        return categoryRepository.save(entity);
-    }
+    Category findById(Long id);
 
-    public Optional<CategoryEntity> findById(Long id) {
-        return categoryRepository.findById(id);
-    }
+    Category save(Category category);
 
-    public void deleteById(Long id) {
-        categoryRepository.deleteById(id);
-    }
+    void deleteById(Long id);
 }

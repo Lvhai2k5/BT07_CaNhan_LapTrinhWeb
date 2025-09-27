@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="vi"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/base}">
+<head>
+  <title>Danh sách danh mục</title>
+</head>
+<body>
+<section layout:fragment="content">
+
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-3">
+    <h1 class="h4 mb-3 mb-md-0">📂 Danh sách danh mục</h1>
+
+    <form class="d-flex" method="get" th:action="@{/categories}">
+      <input class="form-control me-2" type="search" name="q"
+             placeholder="Tìm theo tên/mô tả…" th:value="${q}">
+      <button class="btn btn-outline-primary btn-round" type="submit">🔍 Tìm</button>
+    </form>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <p class="text-muted small mb-0">
+      Tổng: <strong th:text="${page.totalElements}">0</strong> mục
+    </p>
+    <a class="btn btn-primary btn-round" th:href="@{/categories/new}">➕ Thêm danh mục</a>
+  </div>
+
+  <div class="card shadow-sm">
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table align-middle mb-0">
+          <thead class="table-light">
+          <tr>
+            <th style="width:60px;">ID</th>
+            <th>Tên</th>
+            <th>Mô tả</th>
+            <th style="width:200px;">Ngày tạo</th>
+            <th class="text-end" style="width:150px;">Thao tác</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="c : ${page.content}">
+            <td th:text="${c.id}">1</td>
+            <td th:text="${c.name}">Tên</td>
+            <td th:text="${c.description}">Mô tả</td>
+            <td th:text="${#temporals.format(c.createdAt,'dd/MM/yyyy HH:mm')}">01/01/2025</td>
+            <td class="text-end">
+              <a class="btn btn-sm btn-outline-secondary btn-round"
+                 th:href="@{|/categories/${c.id}/edit|}">✏️ Sửa</a>
+              <form th:action="@{|/categories/${c.id}/delete|}" method="post" class="d-inline"
+                    onsubmit="return confirm('Bạn chắc chắn muốn xoá?');">
+                <button class="btn btn-sm btn-outline-danger btn-round">🗑 Xoá</button>
+              </form>
+            </td>
+          </tr>
+          <tr th:if="${page.empty}">
+            <td colspan="5" class="text-center text-muted py-4">Không có dữ liệu</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gọi fragment phân trang -->
+  <div th:replace="fragments/_pagination :: fragment(${page}, ${q})"></div>
+
+</section>
+</body>
+</html>
